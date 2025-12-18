@@ -1,6 +1,7 @@
 // Home page - displays list of popular movies
 import { useState, useEffect } from 'react'
-import { fetchPopularMovies, IMAGE_BASE_URL } from '../api/tmdb'
+import { fetchPopularMovies } from '../api/tmdb'
+import MovieCard from '../components/MovieCard'
 
 const Home = () => {
   // State for storing movies array
@@ -41,15 +42,7 @@ const Home = () => {
         padding: '20px'
       }}>
         {movies.map((movie) => (
-          <div key={movie.id} style={{ textAlign: 'center' }}>
-            <img 
-              src={`${IMAGE_BASE_URL}${movie.poster_path}`}
-              alt={movie.title}
-              style={{ width: '100%', borderRadius: '8px' }}
-            />
-            <h3>{movie.title}</h3>
-            <p>{movie.release_date?.slice(0, 4)}</p>
-          </div>
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
     </div>
