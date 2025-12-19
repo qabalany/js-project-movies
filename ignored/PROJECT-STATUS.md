@@ -73,16 +73,6 @@ src/
 - Keyboard navigation
 - Lighthouse audit (target: 95+)
 
----
-
-## How to Run
-
-```bash
-npm install
-npm run dev
-```
-
-Open http://localhost:5173
 
 ---
 
@@ -102,12 +92,3 @@ const movie = await fetchMovieById(123)
 // Get poster image URL
 const posterUrl = `${IMAGE_BASE_URL}${movie.poster_path}`
 ```
-
----
-
-## Git Commits So Far
-
-1. `Setup project with React Router structure`
-2. `Add TMDB API configuration`
-3. `Fetch and display popular movies on home page`
-4. `Add styled MovieCard component` (pending)
