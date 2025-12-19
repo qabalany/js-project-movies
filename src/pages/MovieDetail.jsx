@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { fetchMovieById, IMAGE_BASE_URL } from '../api/tmdb'
+import Loading from '../components/Loading'
 
 const MovieDetail = () => {
   const { id } = useParams()
@@ -30,34 +31,14 @@ const MovieDetail = () => {
     getMovie()
   }, [id])
 
-  // Centered loading state (no layout jump)
+  // Loading state with spinner
   if (loading) {
-    return (
-      <main
-        style={{
-          minHeight: '70vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '20px'
-        }}
-      >
-        <p
-          aria-live="polite"
-          style={{
-            fontSize: '1.1rem',
-            opacity: 0.8
-          }}
-        >
-          Loading movie details…
-        </p>
-      </main>
-    )
+    return <Loading message="Loading movie details..." />
   }
 
   if (!movie) {
     return (
-      <main style={{ padding: '20px', maxWidth: '1100px', margin: '0 auto' }}>
+      <main id="main-content" style={{ padding: '20px', maxWidth: '1100px', margin: '0 auto' }}>
         <Link to="/">← Back</Link>
         <h1>Movie not available</h1>
         <p>{error || 'This movie is not available.'}</p>
@@ -78,7 +59,7 @@ const MovieDetail = () => {
     : '—'
 
   return (
-    <main style={{ padding: '20px', maxWidth: '1100px', margin: '0 auto' }}>
+    <main id="main-content" style={{ padding: '20px', maxWidth: '1100px', margin: '0 auto' }}>
       <nav aria-label="Navigation" style={{ marginBottom: '16px' }}>
         <Link
           to="/"
@@ -99,6 +80,7 @@ const MovieDetail = () => {
       </nav>
 
       <section
+        aria-label="Movie details"
         style={{
           display: 'grid',
           gridTemplateColumns: 'minmax(220px, 320px) 1fr',

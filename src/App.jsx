@@ -1,17 +1,28 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import MovieDetail from './pages/MovieDetail'
+import NotFound from './pages/NotFound'
 
 export const App = () => {
   return (
-    // Routes container - only one route matches at a time
-    <Routes>
-      {/* Home page - shows at root URL "/" */}
-      <Route path="/" element={<Home />} />
+    <>
+      {/* Skip link for keyboard/screen reader users */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       
-      {/* Movie detail page - :id is a dynamic parameter */}
-      {/* Example: /movies/123 → id = "123" */}
-      <Route path="/movies/:id" element={<MovieDetail />} />
-    </Routes>
+      {/* Routes container - only one route matches at a time */}
+      <Routes>
+        {/* Home page - shows at root URL "/" */}
+        <Route path="/" element={<Home />} />
+        
+        {/* Movie detail page - :id is a dynamic parameter */}
+        {/* Example: /movies/123 → id = "123" */}
+        <Route path="/movies/:id" element={<MovieDetail />} />
+        
+        {/* 404 - Catch all unmatched routes */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   )
 }

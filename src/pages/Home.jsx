@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchPopularMovies } from '../api/tmdb'
 import MovieCard from '../components/MovieCard'
+import Loading from '../components/Loading'
 
 const Home = () => {
   // State for storing movies array
@@ -26,29 +27,43 @@ const Home = () => {
     getMovies()
   }, [])
 
-  // Show loading message while fetching
+  // Show loading spinner while fetching
   if (loading) {
-    return <p>Loading movies...</p>
+    return <Loading message="Loading movies..." />
   }
 
   return (
-    <div>
-      <h1>Popular Movies</h1>
+    <main id="main-content" style={{ padding: '20px', maxWidth: '1400px', margin: '0 auto' }}>
+      <header style={{ marginBottom: '24px' }}>
+        <h1 style={{ fontSize: '2rem', margin: 0 }}>Popular Movies</h1>
+      </header>
 
       {/* Movie grid */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-        gap: '20px',
-        padding: '20px'
-      }}>
+      <section
+        aria-label="Popular movies grid"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+          gap: '20px'
+        }}
+      >
         {movies.map((movie) => (
-          <Link key={movie.id} to={`/movies/${movie.id}`}>
+          <Link
+            key={movie.id}
+            to={`/movies/${movie.id}`}
+            aria-label={`View details for ${movie.title}`}
+            style={{
+              transition: 'transform 0.2s ease',
+              display: 'block'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >
             <MovieCard movie={movie} />
           </Link>
         ))}
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }
 
