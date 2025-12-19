@@ -137,7 +137,25 @@ const MovieDetail = () => {
               <strong>Runtime:</strong> {runtime}
             </p>
             <p style={{ margin: '8px 0 0' }}>
-              <strong>Genres:</strong> {genres}
+              <strong>Genres:</strong>{' '}
+              {movie.genres?.length ? (
+                movie.genres.map((genre, index) => (
+                  <span key={genre.id}>
+                    <Link
+                      to={`/?genre=${genre.id}`}
+                      style={{
+                        color: '#e50914',
+                        textDecoration: 'none'
+                      }}
+                    >
+                      {genre.name}
+                    </Link>
+                    {index < movie.genres.length - 1 && ', '}
+                  </span>
+                ))
+              ) : (
+                '—'
+              )}
             </p>
           </section>
 

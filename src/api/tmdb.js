@@ -28,6 +28,33 @@ export const fetchPopularMovies = async () => {
   return response.json()
 }
 
+// Fetch movies by category (popular, top_rated, upcoming, now_playing)
+export const fetchMoviesByCategory = async (category = 'popular') => {
+  const response = await fetch(`${BASE_URL}/movie/${category}`, options)
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${category} movies`)
+  }
+  return response.json()
+}
+
+// Fetch movies by genre ID
+export const fetchMoviesByGenre = async (genreId) => {
+  const response = await fetch(`${BASE_URL}/discover/movie?with_genres=${genreId}`, options)
+  if (!response.ok) {
+    throw new Error('Failed to fetch movies by genre')
+  }
+  return response.json()
+}
+
+// Fetch all genres list
+export const fetchGenres = async () => {
+  const response = await fetch(`${BASE_URL}/genre/movie/list`, options)
+  if (!response.ok) {
+    throw new Error('Failed to fetch genres')
+  }
+  return response.json()
+}
+
 // Fetch single movie details by ID
 export const fetchMovieById = async (id) => {
   const response = await fetch(`${BASE_URL}/movie/${id}`, options)
