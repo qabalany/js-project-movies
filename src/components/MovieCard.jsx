@@ -23,7 +23,13 @@ const MovieCard = ({ movie }) => {
   const titleStyle = {
     margin: '0 0 8px 0',
     fontSize: '1rem',
-    color: '#fff'
+    color: '#fff',
+    lineHeight: '1.3em',
+    height: '2.6em',      // 2 lines reserved
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden'
   }
 
   const yearStyle = {
@@ -34,7 +40,7 @@ const MovieCard = ({ movie }) => {
 
   return (
     <div style={cardStyle}>
-      <img 
+      <img
         src={`${IMAGE_BASE_URL}${movie.poster_path}`}
         alt={`${movie.title} poster`}
         style={imageStyle}
