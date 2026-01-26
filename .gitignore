@@ -27,3 +27,4 @@ package-lock.json
 
 # Project context files (not for GitHub)
 src/ignored/
+ignored/
